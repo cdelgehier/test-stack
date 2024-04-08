@@ -3,8 +3,8 @@ platform: linux
 image_resource:
   type: registry-image
   source:
-    repository: node
-    tag: lts-alpine
+    repository: python
+    tag: 3.12-alpine
 inputs:
   - name: code
     path: code
@@ -13,9 +13,12 @@ run:
   args:
     - -xce
     - |
-      apk upgrade
-      apk add git
+      apk update
+      #### TOOLBOX #####
+      apk add nodejs npm git openssh
       npm install --global --save-dev semantic-release @semantic-release/changelog @semantic-release/github @semantic-release/exec @semantic-release/git @semantic-release/release-notes-generator conventional-changelog-conventionalcommits
+      #### TOOLBOX #####
+
       cd code
-      semantic-release --ci
+      semantic-release
 ...

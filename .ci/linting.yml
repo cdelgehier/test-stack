@@ -4,18 +4,18 @@ image_resource:
   type: registry-image
   source:
     repository: python
-    tag: 3.12-slim
+    tag: 3.12-alpine
 inputs:
   - name: code
     path: code
 run:
-  path: bash
+  path: sh
   args:
     - -xce
     - |
-      apt-get update -qq -y
+      apk update
       #### TOOLBOX #####
-      apt install -qq -y yamllint curl unzip
+      apk add yamllint curl unzip bash
       curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
       pip install checkov
       #### TOOLBOX #####
