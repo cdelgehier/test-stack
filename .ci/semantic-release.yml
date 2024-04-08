@@ -1,0 +1,18 @@
+---
+platform: linux
+image_resource:
+  type: registry-image
+  source:
+    repository: node
+    tag: lts-alpine
+inputs:
+  - name: code
+    path: code
+run:
+  path: bash
+  args:
+    - -xce
+    - |
+      npm install --global --save-dev semantic-release @semantic-release/changelog @semantic-release/github @semantic-release/exec @semantic-release/git @semantic-release/release-notes-generator conventional-changelog-conventionalcommits
+      npm run semantic-release
+...

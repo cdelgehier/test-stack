@@ -19,4 +19,6 @@ jobs:
       - task: docs
         file: code/.ci/docs.yml
 
+      - task: release
+        file: code/.ci/semantic-release.yml
 ...
