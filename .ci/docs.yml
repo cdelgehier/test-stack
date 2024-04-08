@@ -35,7 +35,7 @@ run:
           rm README.md.new
       fi
 
-      if [ -f "terraform/main.tf" && -f "terraform/.terraform-docs.yaml" ]; then
+      if [ -f "terraform/main.tf" ] && [ -f "terraform/.terraform-docs.yaml" ]; then
           pushd terraform
           terraform-docs -c .terraform-docs.yaml markdown . > README.md.new
           if ! cmp -s README.md README.md.new; then
