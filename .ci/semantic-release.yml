@@ -17,5 +17,5 @@ run:
       apk add git
       npm install --global --save-dev semantic-release @semantic-release/changelog @semantic-release/github @semantic-release/exec @semantic-release/git @semantic-release/release-notes-generator conventional-changelog-conventionalcommits
       cd code
-      semantic-release
+      semantic-release --ci
 ...
