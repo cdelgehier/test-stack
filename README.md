@@ -1,92 +1,196 @@
-# test-stack
-
-
-
-## Getting started
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://integration.shared-services-prd.aws.cld.cma-cgm.com/gitlab/EXT.CDELGEHIER/test-stack.git
-git branch -M master
-git push -uf origin master
-```
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://integration.shared-services-prd.aws.cld.cma-cgm.com/gitlab/EXT.CDELGEHIER/test-stack/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
+# EC2 Instance
 
 ## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+This stack will deploy an ec2 instances
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+![version](https://img.shields.io/badge/version-2-black) ![keywords](https://img.shields.io/badge/keywords-ec2-brightgreen) ![keywords](https://img.shields.io/badge/keywords-instance-brightgreen) ![keywords](https://img.shields.io/badge/keywords-server-brightgreen) ![keywords](https://img.shields.io/badge/keywords-vm-brightgreen) ![keywords](https://img.shields.io/badge/keywords-virtual%20machine-brightgreen) ![keywords](https://img.shields.io/badge/keywords-provider:aws-brightgreen) ![technology](https://img.shields.io/badge/technology-aws-orange)
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+![Image](https://www.netreo.com/wp-content/uploads/200px-AWS_Simple_Icons_Compute_Amazon_EC2_Instances.svg_.png
+)
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+## Author
+CTO
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+## Config
+### Default
+- **Name:** `AWS`
+- **Description:** Terraform plan and apply
+- **Cloud Provider:** aws
+  - **Pipeline Path:** `pipeline/workflow.yml`
+  - **Variables Path:** `pipeline/concourse_variables.yml`
+  - **Destination:** `($ project $)/pipeline/($ environment $)/variables.yml`
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+## Form
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+## Use Case: default
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+### Section: AWS
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+#### Group: Early adopters
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+| Key | Name | Widget | Type | Required | Default |
+| --- | ---- | ------ | ---- | -------- | ------- |
+| `who` | Use case | `dropdown` | `string` | `Required` | `cycloid` |
+#### Group: Location
 
-## License
-For open source projects, say how it is licensed.
+| Key | Name | Widget | Type | Required | Default |
+| --- | ---- | ------ | ---- | -------- | ------- |
+| `aws_account_id` | AWS Account ID | `dropdown` | `map` | `Required` | `` |
+| `aws_region` | AWS Region | `dropdown` | `string` | `Required` | `` |
+### Section: Virtual Machine
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+#### Group: Instance
+
+| Key | Name | Widget | Type | Required | Default |
+| --- | ---- | ------ | ---- | -------- | ------- |
+| `instance_name` | Instance Name | `simple_text` | `string` | `Required` | `` |
+| `ami` | Instance AMI | `simple_text` | `string` | `Required` | `` |
+| `instance_type` | Instance type | `simple_text` | `string` | `Required` | `t3.micro` |
+| `key_pair` | Key pair | `simple_text` | `string` | `Optional` | `` |
+| `iam_instance_profile` | IAM Instance Profile | `simple_text` | `string` | `Optional` | `` |
+| `enable_termination_protection` | Enable termination protection | `switch` | `boolean` | `Required` | `False` |
+| `enable_shutdown_protection` | Enable shutdown protection | `switch` | `boolean` | `Required` | `False` |
+#### Group: Network
+
+| Key | Name | Widget | Type | Required | Default |
+| --- | ---- | ------ | ---- | -------- | ------- |
+| `subnet_id` | Subnet | `simple_text` | `string` | `Required` | `` |
+| `vpc_security_group_ids` | Security Group | `cy_inventory_resource` | `array` | `Optional` | `` |
+#### Group: Backup
+
+| Key | Name | Widget | Type | Required | Default |
+| --- | ---- | ------ | ---- | -------- | ------- |
+| `backup` | Backup | `dropdown` | `string` | `Required` | `no` |
+| `archiving` | Archiving | `switch` | `boolean` | `Required` | `False` |
+### Section: Storage
+
+#### Group: Security
+
+| Key | Name | Widget | Type | Required | Default |
+| --- | ---- | ------ | ---- | -------- | ------- |
+| `kms_key_id` | KMS Key ARN | `cy_inventory_resource` | `string` | `Required` | `` |
+#### Group: Main disk
+
+| Key | Name | Widget | Type | Required | Default |
+| --- | ---- | ------ | ---- | -------- | ------- |
+| `root_block_device_size` | Root volume size | `simple_text` | `string` | `Required` | `` |
+| `root_block_device_type` | Root volume type | `dropdown` | `map` | `Required` | `GP3 - General Purpose - Up to 16,000 IOPS` |
+#### Group: Additional disks
+
+| Key | Name | Widget | Type | Required | Default |
+| --- | ---- | ------ | ---- | -------- | ------- |
+| `ebs_block_device_map` | Additional disks | `text_area` | `map` | `Optional` | `{}` |
+### Section: Applications
+
+#### Group: Details
+
+| Key | Name | Widget | Type | Required | Default |
+| --- | ---- | ------ | ---- | -------- | ------- |
+| `app_name` | Application Name | `simple_text` | `string` | `Required` | `cycloid` |
+| `app_code` | Application Code | `simple_text` | `string` | `Required` | `APP00000` |
+| `data_classification` | Data confidentiality | `dropdown` | `string` | `Required` | `C1` |
+| `app_env` | Application Environment | `dropdown` | `string` | `Required` | `prd` |
+| `aws_id` | FinOps ID | `simple_text` | `string` | `Required` | `XXXXXXXXXXXXXXXXXXXX` |
+| `extra_tags` | Extra Tags | `text_area` | `map` | `Optional` | `{}` |
+
+## Pipeline variables
+
+|Name|Description|Type|Default|Required|
+|---|---|:---:|:---:|:---:|
+|`aws_cred`|Amazon credentials containing access key and secret key for Terraform. See value format [here](https://docs.cycloid.io/advanced-guide/integrate-and-use-cycloid-credentials-manager.html#vault-in-the-pipeline)|`-`|`((s3-backend-for-terraform-state-files))`|`True`|
+|`config_git_branch`|Branch to use on the config Git repository.|`-`|`($ cr_branch $)`|`True`|
+|`config_git_password`|Password to fetch the config Git repository.|`-`|`((gitlab.password))`|`True`|
+|`config_git_repository`|Git repository URL containing the config of the stack.|`-`|`($ cr_url $)`|`True`|
+|`config_git_username`|Username to fetch the config Git repository.|`-`|`((gitlab.username))`|`True`|
+|`config_terraform_path`|Path of Terraform files in the config git repository|`-`|`($ project $)/pipeline/($ environment $)`|`True`|
+|`customer`|Name of the Cycloid Organization, used as customer variable name.|`-`|`($ organization_canonical $)`|`True`|
+|`cycloid_api_key`|API key to grant admin acess to Cycloid API.|`-`|`((cycloid-api-key.key))`|`True`|
+|`cycloid_inventory_jwt`|JWT token to access Cycloid inventory (acting as HTTP Terraform backend).|`-`|`($ inventory_jwt $)`|`True`|
+|`env`|Name of the project's environment.|`-`|`($ environment $)`|`True`|
+|`key_pair`|key_pair associated to the EC2.|`-`|`""`|`False`|
+|`project`|Name of the project.|`-`|`($ project $)`|`True`|
+|`registry_password`|Password for regular image repository, otherwise leave it as a empty string|`-`|`((gitlab_terraform_registry.password))`|`True`|
+|`registry_username`|Username for regular image repository, otherwise leave it as a empty string|`-`|`((gitlab_terraform_registry.username))`|`True`|
+|`stack_git_branch`|Branch to use on the stack Git repository.|`-`|`($ scs_branch $)`|`True`|
+|`stack_git_password`|Password to fetch the stack Git repository.|`-`|`((gitlab.password))`|`True`|
+|`stack_git_repository`|Git repository URL containing the stack.|`-`|`($ scs_url $)`|`True`|
+|`stack_git_username`|Username to fetch the stack Git repository.|`-`|`((gitlab.username))`|`True`|
+|`stack_terraform_path`|Path of Terraform files in the stack git repository|`-`|`ec2-instance/terraform`|`True`|
+|`terraform_version`|terraform version used to execute your code.|`-`|`"1.6.1"`|`True`|
+|`vpc_security_group_ids`|vpc_security_group_ids IDs.|`-`|`"[]"`|`False`|
+
+## Workflow
+
+### Groups
+
+#### create
+
+- `terraform-plan`
+- `terraform-apply`
+
+#### destroy
+
+- `terraform-destroy`
+
+
+### Job: `terraform-plan`
+
+├── Get: stack-source<br/>
+├── Get: stack-config<br/>
+├── Task: merge-stack-source-and-config<br/>
+│     └── **Inputs**<br/>
+│         └── 📄 stack-config<br/>
+│         └── 📄 stack-source<br/>
+│     └── **Params**<br/>
+│         └── ⚙️ CONFIG_PATH: ((config_terraform_path))<br/>
+│         └── ⚙️ STACK_PATH: ((stack_terraform_path))<br/>
+│     └── **Outputs**<br/>
+│         └── 📝 merged-stack<br/>
+├── Task: set-credentials-docker-registry<br/>
+│     └── **Inputs**<br/>
+│         └── 📄 merged-stack<br/>
+│     └── **Outputs**<br/>
+│         └── 📝 merged-stack<br/>
+└── Put: tfstate<br/>
+
+### Job: `terraform-apply`
+
+├── Get: stack-source<br/>
+├── Get: stack-config<br/>
+├── Get: tfstate<br/>
+├── Task: merge-stack-source-and-config<br/>
+│     └── **Inputs**<br/>
+│         └── 📄 stack-config<br/>
+│         └── 📄 stack-source<br/>
+│     └── **Params**<br/>
+│         └── ⚙️ CONFIG_PATH: ((config_terraform_path))<br/>
+│         └── ⚙️ STACK_PATH: ((stack_terraform_path))<br/>
+│     └── **Outputs**<br/>
+│         └── 📝 merged-stack<br/>
+├── Task: set-credentials-docker-registry<br/>
+│     └── **Inputs**<br/>
+│         └── 📄 merged-stack<br/>
+│     └── **Outputs**<br/>
+│         └── 📝 merged-stack<br/>
+└── Put: tfstate<br/>
+
+### Job: `terraform-destroy`
+
+├── Get: stack-source<br/>
+├── Get: stack-config<br/>
+├── Task: merge-stack-source-and-config<br/>
+│     └── **Inputs**<br/>
+│         └── 📄 stack-config<br/>
+│         └── 📄 stack-source<br/>
+│     └── **Params**<br/>
+│         └── ⚙️ CONFIG_PATH: ((config_terraform_path))<br/>
+│         └── ⚙️ STACK_PATH: ((stack_terraform_path))<br/>
+│     └── **Outputs**<br/>
+│         └── 📝 merged-stack<br/>
+├── Task: set-credentials-docker-registry<br/>
+│     └── **Inputs**<br/>
+│         └── 📄 merged-stack<br/>
+│     └── **Outputs**<br/>
+│         └── 📝 merged-stack<br/>
+└── Put: tfstate<br/>

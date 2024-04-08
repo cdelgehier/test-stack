@@ -1,0 +1,15 @@
+---
+
+extends: default
+
+ignore: |
+  *.sample.yml
+  *.sample.yaml
+  terraform/.terraform/*
+
+rules:
+  line-length: disable
+  document-end:
+    level: warning
+  comments: disable
+...

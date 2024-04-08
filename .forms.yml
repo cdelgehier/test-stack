@@ -1,0 +1,218 @@
+---
+version: "2"
+
+
+shared:
+  - &application-infos
+    - name: projec  name
+      key: app_project
+      widget: simple_text
+      type: string
+      default: cycloid
+      required: true
+    - name: Application Name
+      key: app_name
+      widget: simple_text
+      type: string
+      default: cycloid
+      required: true
+
+use_cases:
+  - name: default
+    sections:
+
+      - name: Virtual Machine
+        groups:
+          - name: Instance
+            technologies: [pipeline]
+            vars:
+              - name: Instance Name
+                description: |
+                  A unique and human-readable name for your EC2 instance.
+                  This name is helpful for identifying and managing your instances easily.
+                key: instance_name
+                widget: simple_text
+                type: string
+                required: true
+
+              - name: Instance AMI
+                description: |
+                  The Amazon Machine Image (AMI) ID used to launch the EC2 instance.
+                  This ID uniquely identifies the pre-configured virtual machine image.
+                key: ami
+                widget: simple_text
+                type: string
+                required: true
+
+              - name: Instance type
+                description: Amazon EC2 provides a wide [selection](https://aws.amazon.com/ec2/instance-types/) of instance types optimized to fit different use cases
+                key: instance_type
+                widget: simple_text
+                type: string
+                default: t3.micro
+                required: true
+
+              - name: Key pair
+                description: |
+                  The name of the key pair to associate with the EC2 instance.
+                  This key pair is used for securely accessing the instance.
+                key: key_pair
+                widget: simple_text
+                type: string
+                required: false
+
+              - name: IAM Instance Profile
+                description: |
+                  The IAM instance profile to associate with the EC2 instance.
+                  An instance profile is a container for an IAM role that you can use to pass role information to an EC2 instance when the instance starts.
+                  This name is the one after "instance-profile/" in the ARN mentioned in the role *"arn:aws:iam::xxxxxx:instance-profile/`NAME`"*
+                key: iam_instance_profile
+                widget: simple_text
+                type: string
+                required: false
+                default: ""
+
+              - name: Enable termination protection
+                description: Enable termination protection on the instance. This is useful in production to avoid instance being manually deleted.
+                key: enable_termination_protection
+                widget: switch
+                type: boolean
+                required: true
+                default: false
+
+              - name: Enable shutdown protection
+                description: Enable shutdown protection on the instance. This is useful in production to avoid instance being manually shutdown.
+                key: enable_shutdown_protection
+                widget: switch
+                type: boolean
+                required: true
+                default: false
+
+
+          - name: Network
+            technologies: [pipeline]
+            vars:
+              - name: Subnet
+                description: |
+                  The ID of the subnet in which to launch the EC2 instance.
+                  Specifies the network segment where the instance will be placed.
+                  The subnet ID starts with "subnet-".
+                key: subnet_id
+                widget: simple_text
+                type: string
+                required: true
+
+              # - name: Security groups
+              #   description: |
+              #     A list of security group IDs to associate with the EC2 instance.
+              #     Security groups control inbound and outbound traffic to and from the instance.
+              #     The security groups ID starts with "sg-".
+              #   key: vpc_security_group_ids
+              #   widget: text_area
+              #   type: array
+              #   required: false
+              - name: Security Group
+                description: |
+                  A list of security group IDs to associate with the EC2 instance.
+                  Security groups control inbound and outbound traffic to and from the instance.
+                  The security groups ID starts with "sg-".
+                key: vpc_security_group_ids
+                widget: cy_inventory_resource
+                type: array
+                widget_config:
+                  attribute: id
+                  filters:
+                    type: aws_security_group
+
+          - name: Backup
+            technologies: [pipeline]
+            vars:
+              - name: Backup
+                description: |
+                  Backup resource
+                key: backup
+                widget: dropdown
+                type: string
+                values: ["rpo4h", "rpo24h", "rpo1h", "continuous", "vss", "no"]
+                default: "no"
+                required: true
+
+              - name: Archiving
+                description: AWS Archiving and Legal Policy
+                key: archiving
+                widget: switch
+                type: boolean
+                default: false
+                required: true
+
+      - name: Storage
+        groups:
+          - name: Security
+            technologies: [pipeline]
+            vars:
+              - name: KMS Key ARN
+                description: |
+                  The Key Management Service (KMS) key ARN to be used for encrypting the root volume.
+                  Example: *`arn:aws:kms:eu-west-1:ACCOUNT_NUMBER:key/KMS_KEY_ID`*
+                key: kms_key_id
+                widget: cy_inventory_resource
+                type: string
+                widget_config:
+                  attribute: arn
+                  filters:
+                    type: aws_kms_key
+                required: true
+
+          - name: Main disk
+            technologies: [pipeline]
+            vars:
+              - name: Root volume size
+                description: The size of the main volume.<br/>This is the volume `C:\` for Windows or `/` for Linux.
+                key: root_block_device_size
+                widget: simple_text
+                type: string
+                required: true
+
+              - name: Root volume type
+                description: |
+                  The type of storage volume for the root filesystem.
+                  This determines the performance characteristics and cost of the storage.
+                key: root_block_device_type
+                widget: dropdown
+                type: map
+                values:
+                  - label: "GP3 - General Purpose - Up to 16,000 IOPS"
+                    value: "gp3"
+                  - label: "IO1 - Provisioned IOPS - Up to 64,000 IOPS"
+                    value: "io1"
+                required: true
+                default: "GP3 - General Purpose - Up to 16,000 IOPS"
+
+          - name: Additional disks
+            technologies: [pipeline]
+            vars:
+              - name: Additional disks
+                description: |
+                  A list of additional disks to attach to the EC2 instance.
+                  Theses disks will be encrypted by default with KMS key provided.
+                  <details><summary>Examples</summary>
+                  ```yaml
+                  /dev/sdb:
+                    volume_size: 10
+                    volume_type: gp3
+                  /dev/sdc:
+                    volume_size: 20
+                    volume_type: gp3
+                  ```
+                  </details>
+                key: ebs_block_device_map
+                widget: text_area
+                type: map
+                default: {}
+
+      - name: Applications
+        groups:
+          - name: Details
+            technologies: [pipeline]
+            vars: *application-infos
+...

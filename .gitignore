@@ -1,0 +1,7 @@
+# ignore virtual envs
+.env
+env
+.venv
+venv
+# ignore molecule/testinfra pycache
+**/__pycache__

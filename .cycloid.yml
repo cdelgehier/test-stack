@@ -1,0 +1,30 @@
+---
+version: "2"
+name: "EC2 Instance"
+canonical: "compute-ec2-simple"
+status: private
+description: "This stack will deploy an ec2 instances"
+keywords:
+  - ec2
+  - instance
+  - server
+  - vm
+  - virtual machine
+  - provider:aws
+image: |
+  https://www.netreo.com/wp-content/uploads/200px-AWS_Simple_Icons_Compute_Amazon_EC2_Instances.svg_.png
+author: CTO
+technologies:
+  - technology: aws
+config:
+  default:
+    name: "AWS"
+    description: "Terraform plan and apply"
+    cloud_provider: "aws"
+    pipeline:
+      pipeline:
+        path: "pipeline/workflow.yml"
+      variables:
+        path: "pipeline/concourse_variables.yml"
+        destination: '($ project $)/pipeline/($ environment $)/variables.yml'
+...
