@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
-tar -czf release.tar.gz .
+VERSION=$1
+
+tar -czf "release-$VERSION.tar.gz" .
