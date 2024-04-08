@@ -11,7 +11,7 @@ VERSION_FILE="VERSION.md"
 
 # Usage
 print_usage() {
-    echo "Set the app/add-on version"
+    echo "Set the stack version"
     echo ""
     echo "Usage:"
     echo "  set-version.sh <new-version>"
@@ -19,8 +19,7 @@ print_usage() {
 }
 
 # if less than one arguments supplied, display usage
-if [  $# -lt 1 ]
-then
+if [  $# -lt 1 ]; then
     print_usage
     exit 1
 fi
@@ -32,4 +31,4 @@ if [ "$1" == "--help" ] || [ "$1" == "-h" ]; then
 fi
 
 # set stack version in VERSION_FILE
-echo "$VERSION" > $VERSION_FILE
+echo "$VERSION" > "${ROOT}/${VERSION_FILE}"
