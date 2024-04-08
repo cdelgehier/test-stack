@@ -2,4 +2,4 @@
 
 VERSION=$1
 
-tar -czf "release-$VERSION.tar.gz" .
+tar -czf "release-v$VERSION.tar.gz" .

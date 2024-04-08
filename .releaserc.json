@@ -74,7 +74,7 @@
       "@semantic-release/git",
       {
         "assets": [
-          "release.tar.gz",
+          "release-v${nextRelease.version}.tar.gz",
           "CHANGELOG.md",
           "VERSION.md"
         ],
