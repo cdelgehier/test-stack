@@ -1,0 +1,49 @@
+---
+platform: linux
+image_resource:
+  type: registry-image
+  source:
+    repository: python
+    tag: 3.12-slim
+inputs:
+  - name: code
+    path: code
+run:
+  path: bash
+  args:
+    - -xce
+    - |
+      apt-get update -qq -y
+      #### TOOLBOX #####
+      apt install -qq -y yamllint curl
+      #pip install git+https://xxxxx/gitlab/xxxxx/cycloid-docs@v1.0.0
+
+      curl -sSLo ./terraform-docs.tar.gz https://terraform-docs.io/dl/v0.17.0/terraform-docs-v0.17.0-$(uname)-amd64.tar.gz
+      tar -xzf terraform-docs.tar.gz
+      chmod +x terraform-docs
+      mv terraform-docs /usr/bin/
+
+      #### TOOLBOX #####
+
+      if [ -f ".cycloid.yml" ]; then
+          cydocs > README.md.new
+          if ! cmp -s README.md README.md.new; then
+              echo "The stack documentation has not been updated."
+              echo "You should install the pre-commit provided."
+              exit 1
+          fi
+          rm README.md.new
+      fi
+
+      if [ -f "terraform/main.tf" && -f "terraform/.terraform-docs.yaml" ]; then
+          pushd terraform
+          terraform-docs -c .terraform-docs.yaml markdown . > README.md.new
+          if ! cmp -s README.md README.md.new; then
+              echo "The terraform documentation has not been updated."
+              echo "You should install the pre-commit provided."
+              exit 1
+          fi
+          rm README.md.new
+          popd
+      fi
+...

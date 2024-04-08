@@ -25,19 +25,6 @@ CTO
 
 ## Use Case: default
 
-### Section: AWS
-
-#### Group: Early adopters
-
-| Key | Name | Widget | Type | Required | Default |
-| --- | ---- | ------ | ---- | -------- | ------- |
-| `who` | Use case | `dropdown` | `string` | `Required` | `cycloid` |
-#### Group: Location
-
-| Key | Name | Widget | Type | Required | Default |
-| --- | ---- | ------ | ---- | -------- | ------- |
-| `aws_account_id` | AWS Account ID | `dropdown` | `map` | `Required` | `` |
-| `aws_region` | AWS Region | `dropdown` | `string` | `Required` | `` |
 ### Section: Virtual Machine
 
 #### Group: Instance
@@ -87,12 +74,8 @@ CTO
 
 | Key | Name | Widget | Type | Required | Default |
 | --- | ---- | ------ | ---- | -------- | ------- |
+| `app_project` | projec  name | `simple_text` | `string` | `Required` | `cycloid` |
 | `app_name` | Application Name | `simple_text` | `string` | `Required` | `cycloid` |
-| `app_code` | Application Code | `simple_text` | `string` | `Required` | `APP00000` |
-| `data_classification` | Data confidentiality | `dropdown` | `string` | `Required` | `C1` |
-| `app_env` | Application Environment | `dropdown` | `string` | `Required` | `prd` |
-| `aws_id` | FinOps ID | `simple_text` | `string` | `Required` | `XXXXXXXXXXXXXXXXXXXX` |
-| `extra_tags` | Extra Tags | `text_area` | `map` | `Optional` | `{}` |
 
 ## Pipeline variables
 
@@ -147,11 +130,6 @@ CTO
 │         └── ⚙️ STACK_PATH: ((stack_terraform_path))<br/>
 │     └── **Outputs**<br/>
 │         └── 📝 merged-stack<br/>
-├── Task: set-credentials-docker-registry<br/>
-│     └── **Inputs**<br/>
-│         └── 📄 merged-stack<br/>
-│     └── **Outputs**<br/>
-│         └── 📝 merged-stack<br/>
 └── Put: tfstate<br/>
 
 ### Job: `terraform-apply`
@@ -168,11 +146,6 @@ CTO
 │         └── ⚙️ STACK_PATH: ((stack_terraform_path))<br/>
 │     └── **Outputs**<br/>
 │         └── 📝 merged-stack<br/>
-├── Task: set-credentials-docker-registry<br/>
-│     └── **Inputs**<br/>
-│         └── 📄 merged-stack<br/>
-│     └── **Outputs**<br/>
-│         └── 📝 merged-stack<br/>
 └── Put: tfstate<br/>
 
 ### Job: `terraform-destroy`
@@ -186,11 +159,6 @@ CTO
 │     └── **Params**<br/>
 │         └── ⚙️ CONFIG_PATH: ((config_terraform_path))<br/>
 │         └── ⚙️ STACK_PATH: ((stack_terraform_path))<br/>
-│     └── **Outputs**<br/>
-│         └── 📝 merged-stack<br/>
-├── Task: set-credentials-docker-registry<br/>
-│     └── **Inputs**<br/>
-│         └── 📄 merged-stack<br/>
 │     └── **Outputs**<br/>
 │         └── 📝 merged-stack<br/>
 └── Put: tfstate<br/>

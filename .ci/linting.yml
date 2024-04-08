@@ -1,0 +1,26 @@
+---
+platform: linux
+image_resource:
+  type: registry-image
+  source:
+    repository: python
+    tag: 3.12-slim
+inputs:
+  - name: code
+    path: code
+run:
+  path: bash
+  args:
+    - -xce
+    - |
+      apt-get update -qq -y
+      #### TOOLBOX #####
+      apt install -qq -y yamllint curl unzip
+      curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
+      pip install checkov
+      #### TOOLBOX #####
+
+      yamllint code -c code/.yamllint
+
+      #[ -d "code/terraform" ] && tflint --chdir=code/terraform
+...
