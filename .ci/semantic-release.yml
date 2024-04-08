@@ -9,7 +9,7 @@ inputs:
   - name: code
     path: code
 run:
-  path: bash
+  path: sh
   args:
     - -xce
     - |
